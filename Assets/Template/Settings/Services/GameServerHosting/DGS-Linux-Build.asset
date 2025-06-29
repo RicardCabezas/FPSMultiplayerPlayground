@@ -19,19 +19,15 @@ MonoBehaviour:
   m_PlatformBuildProfile:
     rid: 6785339862626336769
   m_OverrideGlobalSceneList: 1
-  m_Scenes:
-  - m_enabled: 1
-    m_path: Assets/Scenes/ServerScene.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/GameScene.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/GameResources.unity
+  m_Scenes: []
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 6785339862626336769
       type: {class: LinuxPlatformSettings, ns: UnityEditor.LinuxStandalone, asm: UnityEditor.LinuxStandalone.Extensions}
       data:
