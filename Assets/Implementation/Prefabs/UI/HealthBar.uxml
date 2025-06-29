@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Template/UIToolkit/Game/CompetitiveActionStyle.uss?fileID=7433441132597879392&amp;guid=25077356dd9bf4548b2c9e74070831b9&amp;type=3#CompetitiveActionStyle" />
+    <ui:ProgressBar value="100" title="100" language-direction="LTR" usage-hints="None" style="-unity-background-image-tint-color: rgb(255, 255, 255); color: rgb(0, 0, 0); -unity-text-outline-width: -52px; width: 150px; justify-content: center; align-self: auto; align-content: auto; align-items: auto; flex-direction: column; position: absolute; left: auto;" />
+</ui:UXML>
