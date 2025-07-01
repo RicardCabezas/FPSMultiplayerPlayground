@@ -29,6 +29,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
         [Header("Other Prefabs")]
         public GameObject SpectatorPrefab;
         public GameObject NameTagPrefab;
+        public GameObject HealthBarPrefab;
 
         [Tooltip("Prevent player spawning if another player is within this radius!")]
         public float SpawnPointBlockRadius = 1f;
@@ -75,6 +76,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
                     AddComponent(entity, new GameManagedResources
                     {
                         NameTagPrefab = authoring.NameTagPrefab,
+                        HealthBarPrefab = authoring.HealthBarPrefab,
                     });
 
                     //The order in this array has to follow the VfxType enum order so the correct vfx is spawned
@@ -119,6 +121,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
     public struct GameManagedResources : IComponentData
     {
         public UnityObjectRef<GameObject> NameTagPrefab;
+        public UnityObjectRef<GameObject> HealthBarPrefab;
     }
 
     public struct GameResourcesWeapon : IBufferElementData

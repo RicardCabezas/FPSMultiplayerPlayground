@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2cd7643347b0f4dbf1cd3003951cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JoinTimeout: 6
   DespawnTicks: 16
   PolledEventsTicks: 16
   RespawnTimeSeconds: 4
@@ -59,6 +58,7 @@ MonoBehaviour:
   - {fileID: 9058671491380490423, guid: b57eb5e59fe483041bcc4dee19f60dbc, type: 3}
   SpectatorPrefab: {fileID: 10482797864367398, guid: 6f4378ce200172f42bc501e84a3a7220, type: 3}
   NameTagPrefab: {fileID: 8730612403662211868, guid: ef87bfdfd51e45f4f83acb4dd63871fe, type: 3}
+  HealthBarPrefab: {fileID: 8730612403662211868, guid: 9ea46a08837b3412995228e886c7d694, type: 3}
   SpawnPointBlockRadius: 1
   MachineGunBulletHitVfx: {fileID: 5735981394477805925, guid: 6ce8060434497e6429ed57f804fc5215, type: 3}
   ShotgunBulletHitVfx: {fileID: 5735981394477805925, guid: ee9a55247cf3a1249b7a416fc5dcf30a, type: 3}
