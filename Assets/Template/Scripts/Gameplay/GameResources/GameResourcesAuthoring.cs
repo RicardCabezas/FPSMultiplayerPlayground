@@ -30,6 +30,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
         public GameObject SpectatorPrefab;
         public GameObject NameTagPrefab;
         public GameObject HealthBarPrefab;
+        public GameObject VisualHitPrefab;
 
         [Tooltip("Prevent player spawning if another player is within this radius!")]
         public float SpawnPointBlockRadius = 1f;
@@ -60,6 +61,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
                     SpectatorPrefab = GetEntity(authoring.SpectatorPrefab, TransformUsageFlags.Dynamic),
 
                     ForceOnlyFirstWeapon = authoring.ForceOnlyFirstWeapon,
+                    OnHitFeedback = GetEntity(authoring.VisualHitPrefab, TransformUsageFlags.Dynamic),
                 });
 
                 DynamicBuffer<GameResourcesWeapon> weaponsBuffer = AddBuffer<GameResourcesWeapon>(entity);
@@ -116,6 +118,8 @@ namespace Unity.Template.CompetitiveActionMultiplayer
 
         public float SpawnPointBlockRadius;
         public CollisionFilter SpawnPointCollisionFilter;
+        
+        public Entity OnHitFeedback;
     }
 
     public struct GameManagedResources : IComponentData

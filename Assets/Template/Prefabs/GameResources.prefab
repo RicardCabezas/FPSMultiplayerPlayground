@@ -59,6 +59,7 @@ MonoBehaviour:
   SpectatorPrefab: {fileID: 10482797864367398, guid: 6f4378ce200172f42bc501e84a3a7220, type: 3}
   NameTagPrefab: {fileID: 8730612403662211868, guid: ef87bfdfd51e45f4f83acb4dd63871fe, type: 3}
   HealthBarPrefab: {fileID: 8730612403662211868, guid: 9ea46a08837b3412995228e886c7d694, type: 3}
+  VisualHitPrefab: {fileID: 7460990098522836823, guid: e0b9de50c58db487dafb0fa777f742c8, type: 3}
   SpawnPointBlockRadius: 1
   MachineGunBulletHitVfx: {fileID: 5735981394477805925, guid: 6ce8060434497e6429ed57f804fc5215, type: 3}
   ShotgunBulletHitVfx: {fileID: 5735981394477805925, guid: ee9a55247cf3a1249b7a416fc5dcf30a, type: 3}
