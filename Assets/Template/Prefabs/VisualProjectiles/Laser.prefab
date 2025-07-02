@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3e5ec415d6448e85ece22e2d674998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VfxType: 0
+  IsBulletType: 0
   LowVfxSpawnCount: 8
   MidVfxSpawnCount: 32
   HighVfxSpawnCount: 128
