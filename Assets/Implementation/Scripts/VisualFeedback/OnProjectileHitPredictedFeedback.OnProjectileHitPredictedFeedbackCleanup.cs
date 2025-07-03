@@ -19,13 +19,13 @@ public partial struct OnProjectileHitPredictedFeedback
                 
             float deltaTime = SystemAPI.Time.DeltaTime;
                 
-            foreach (var (damageHitFeedback, entity) in SystemAPI
-                         .Query<RefRW<DamageHitFeedback>>()
+            foreach (var (lifeTime, entity) in SystemAPI
+                         .Query<RefRW<LifeTime>>()
                          .WithEntityAccess())
             {
-                damageHitFeedback.ValueRW.LifeTime -= deltaTime;
+                lifeTime.ValueRW.LifeTimeSeconds -= deltaTime;
 
-                if (damageHitFeedback.ValueRO.LifeTime <= 0f)
+                if (lifeTime.ValueRO.LifeTimeSeconds <= 0f)
                 {
                     ecb.DestroyEntity(entity);
                 }

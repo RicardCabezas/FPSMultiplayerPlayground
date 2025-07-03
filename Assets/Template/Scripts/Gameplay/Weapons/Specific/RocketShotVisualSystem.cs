@@ -23,7 +23,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
         }
 
         [BurstCompile]
-        public void OnUpdate(ref SystemState state)
+        public void OnUpdate(ref SystemState state) 
         {
             RocketSimulationJob simulationJob = new RocketSimulationJob
             {

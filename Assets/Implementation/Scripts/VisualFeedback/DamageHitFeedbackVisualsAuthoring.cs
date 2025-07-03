@@ -3,20 +3,30 @@ using UnityEngine;
 
 namespace MultiplayerAdditions.PredictedFeedback
 {
-    public class DamageHitFeedbackVisualsAuthoring : MonoBehaviour
+    public class DamageHitPredictedFeedbackVisualsAuthoring : MonoBehaviour
     {
-        public float Lifetime = 1f;
+        public float LifetimeSeconds = 1f;
+        public bool IsNetworked; // You can toggle between Ghost or local use
+        
 
-        class Baker : Baker<DamageHitFeedbackVisualsAuthoring>
+        public class HitFeedbackBaker : Baker<DamageHitPredictedFeedbackVisualsAuthoring>
         {
-            public override void Bake(DamageHitFeedbackVisualsAuthoring authoring)
+            public override void Bake(DamageHitPredictedFeedbackVisualsAuthoring authoring)
             {
-                Entity selfEntity = GetEntity(TransformUsageFlags.Dynamic | TransformUsageFlags.NonUniformScale);
+                var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-                AddComponent(selfEntity, new DamageHitFeedback
+                if (authoring.IsNetworked)
                 {
-                    LifeTime = authoring.Lifetime,
-                });
+                    AddComponent<HitFeedbackEvent>(entity);
+                }
+                else
+                {
+                    AddComponent<DamageHitFeedback>(entity); // Lifetime-controlled visual
+                    AddComponent(entity, new LifeTime
+                    {
+                        LifeTimeSeconds = authoring.LifetimeSeconds,
+                    });
+                }
             }
         }
     }

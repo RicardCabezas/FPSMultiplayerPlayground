@@ -120,6 +120,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
         public CollisionFilter SpawnPointCollisionFilter;
         
         public Entity OnHitFeedback;
+        public Entity OnHitFeedbackGhost;
     }
 
     public struct GameManagedResources : IComponentData
