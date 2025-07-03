@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+    using System.Collections.Generic;
 using Unity.Entities;
 using Unity.NetCode.Hybrid;
 using Unity.Physics;
@@ -31,6 +31,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
         public GameObject NameTagPrefab;
         public GameObject HealthBarPrefab;
         public GameObject VisualHitPrefab;
+        public GameObject VisualHitPrefabGhost;
 
         [Tooltip("Prevent player spawning if another player is within this radius!")]
         public float SpawnPointBlockRadius = 1f;
@@ -62,6 +63,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
 
                     ForceOnlyFirstWeapon = authoring.ForceOnlyFirstWeapon,
                     OnHitFeedback = GetEntity(authoring.VisualHitPrefab, TransformUsageFlags.Dynamic),
+                    OnHitFeedbackGhost = GetEntity(authoring.VisualHitPrefabGhost, TransformUsageFlags.Dynamic),
                 });
 
                 DynamicBuffer<GameResourcesWeapon> weaponsBuffer = AddBuffer<GameResourcesWeapon>(entity);
