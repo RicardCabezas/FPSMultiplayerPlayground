@@ -245,15 +245,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer
 
                             // Spawn & assign starting weapon
                             Entity randomWeaponPrefab;
-                            if (gameResources.ForceOnlyFirstWeapon)
-                            {
-                                randomWeaponPrefab = weaponPrefabs[0].WeaponPrefab;
-                            }
-                            else
-                            {
-                                randomWeaponPrefab = weaponPrefabs[random.Random.NextInt(0, weaponPrefabs.Length)]
-                                    .WeaponPrefab;
-                            }
+                            randomWeaponPrefab = weaponPrefabs[4].WeaponPrefab;
 
                             // Weapon
                             Entity weaponEntity = ecb.Instantiate(randomWeaponPrefab);
