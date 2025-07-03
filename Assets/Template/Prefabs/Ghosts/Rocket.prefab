@@ -105,9 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaefc99a12f5feb45851a1c4a2b18fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirectHitDamage: 100
-  MaxRadiusDamage: 130
-  DamageRadius: 5
+  DirectHitDamage: 40
+  MaxRadiusDamage: 0
+  DamageRadius: 0
 --- !u!114 &7426047537680517407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3e5ec415d6448e85ece22e2d674998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VfxType: 0
+  IsBulletType: 0
   LowVfxSpawnCount: 8
   MidVfxSpawnCount: 32
   HighVfxSpawnCount: 128
