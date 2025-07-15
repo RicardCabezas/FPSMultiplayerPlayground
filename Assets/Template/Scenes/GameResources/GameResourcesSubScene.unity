@@ -247,9 +247,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3230673561171217928, guid: 113ae9b4c553f004ea097e9be244d5ac, type: 3}
-      propertyPath: VisualHitPrefab
-      value: 
-      objectReference: {fileID: 7460990098522836823, guid: e0b9de50c58db487dafb0fa777f742c8, type: 3}
+      propertyPath: ForceOnlyFirstWeapon
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
