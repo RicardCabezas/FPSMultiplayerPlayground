@@ -7,17 +7,6 @@ using UnityEngine.UIElements;
 
 namespace Unity.Template.CompetitiveActionMultiplayer.Implementation
 {
-    public struct HealthBarProxy : IComponentData
-    {
-        public Entity PlayerEntity;
-    }
-
-    public class HealthBarProxyCleanup : ICleanupComponentData
-    {
-        public UIDocument UIDocumentComponent;
-    }
-    
-
     /// <summary>
     /// This class creates and update the position of the players name on each character currently playing.
     /// </summary>
@@ -28,7 +17,6 @@ namespace Unity.Template.CompetitiveActionMultiplayer.Implementation
     {
         protected override void OnCreate()
         {
-            //TODO: dont use this
             RequireForUpdate<GameManagedResources>();
         }
 
@@ -42,7 +30,8 @@ namespace Unity.Template.CompetitiveActionMultiplayer.Implementation
 
         void SpawnHealthBar()
         {
-            EntityCommandBuffer ecb = SystemAPI.GetSingletonRW<BeginSimulationEntityCommandBufferSystem.Singleton>().ValueRW.CreateCommandBuffer(World.Unmanaged);
+            EntityCommandBuffer ecb = SystemAPI.GetSingletonRW<BeginSimulationEntityCommandBufferSystem.Singleton>()
+                .ValueRW.CreateCommandBuffer(World.Unmanaged);
             foreach (var (healthBarProxy, entity) in SystemAPI.Query<RefRO<HealthBarProxy>>()
                          .WithNone<HealthBarProxyCleanup>().WithEntityAccess())
             {
@@ -59,8 +48,7 @@ namespace Unity.Template.CompetitiveActionMultiplayer.Implementation
                 GameObject healthBarInstance =
                     Object.Instantiate(SystemAPI.GetSingleton<GameManagedResources>().HealthBarPrefab.Value,
                         healthBarContained.transform, true);
-                
-                //TODO: protect against null ref
+
                 var uiDocumentComponent = healthBarInstance.GetComponent<UIDocument>();
                 ProgressBar progressBar = uiDocumentComponent.rootVisualElement.Q<ProgressBar>();
                 progressBar.value = health;
@@ -69,49 +57,53 @@ namespace Unity.Template.CompetitiveActionMultiplayer.Implementation
                 ecb.AddComponent(entity, new HealthBarProxyCleanup { UIDocumentComponent = uiDocumentComponent });
             }
         }
-        
+
         void UpdateHealthBarValue()
+        {
+            ComponentLookup<Health> healthLookup = SystemAPI.GetComponentLookup<Health>(true);
+            var ecb = SystemAPI.GetSingletonRW<EndSimulationEntityCommandBufferSystem.Singleton>().ValueRW
+                .CreateCommandBuffer(World.Unmanaged);
+
+            foreach (var (proxy, cleanup, entity) in SystemAPI.Query<RefRO<HealthBarProxy>, HealthBarProxyCleanup>()
+                         .WithEntityAccess())
+            {
+                var playerEntity = proxy.ValueRO.PlayerEntity;
+                if (!healthLookup.HasComponent(playerEntity))
+                    continue;
+
+                var health = healthLookup[playerEntity];
+
+                if (health.CurrentHealth <= 0f)
                 {
-                    ComponentLookup<Health> healthLookup = SystemAPI.GetComponentLookup<Health>(true);
-                    var ecb = SystemAPI.GetSingletonRW<EndSimulationEntityCommandBufferSystem.Singleton>().ValueRW.CreateCommandBuffer(World.Unmanaged);
-
-                    foreach (var (proxy, cleanup, entity) in SystemAPI.Query<RefRO<HealthBarProxy>, HealthBarProxyCleanup>().WithEntityAccess())
-                    {
-                        var playerEntity = proxy.ValueRO.PlayerEntity;
-                        if (!healthLookup.HasComponent(playerEntity))
-                            continue;
-
-                        var health = healthLookup[playerEntity];
-                        
-                        if (health.CurrentHealth <= 0f)
-                        {
-                            // Remove the HealthBarProxy to trigger cleanup
-                            ecb.RemoveComponent<HealthBarProxy>(entity);
-                            continue;
-                        }
-                        
-                        var healthRatio = health.CurrentHealth / health.MaxHealth;
-
-                        var progressBar = cleanup.UIDocumentComponent.rootVisualElement.Q<ProgressBar>();
-                        if (progressBar != null)
-                        {
-                            progressBar.value = healthRatio;
-                            progressBar.title = health.CurrentHealth.ToString("F0");
-                        }
-                    }
+                    // Remove the HealthBarProxy to trigger cleanup
+                    ecb.RemoveComponent<HealthBarProxy>(entity);
+                    continue;
                 }
-        
 
+                var healthRatio = health.CurrentHealth / health.MaxHealth;
+
+                var progressBar = cleanup.UIDocumentComponent.rootVisualElement.Q<ProgressBar>();
+                if (progressBar != null)
+                {
+                    progressBar.value = healthRatio;
+                    progressBar.title = health.CurrentHealth.ToString(CultureInfo.InvariantCulture);
+                }
+            }
+        }
+        
         void CleanUpHealthBar()
         {
-            EntityCommandBuffer ecb = SystemAPI.GetSingletonRW<EndSimulationEntityCommandBufferSystem.Singleton>().ValueRW.CreateCommandBuffer(World.Unmanaged);
-            foreach (var (cleanup, entity) in SystemAPI.Query<HealthBarProxyCleanup>().WithNone<HealthBarProxy>().WithEntityAccess())
+            EntityCommandBuffer ecb = SystemAPI.GetSingletonRW<EndSimulationEntityCommandBufferSystem.Singleton>()
+                .ValueRW.CreateCommandBuffer(World.Unmanaged);
+            foreach (var (cleanup, entity) in SystemAPI.Query<HealthBarProxyCleanup>().WithNone<HealthBarProxy>()
+                         .WithEntityAccess())
             {
                 if (cleanup.UIDocumentComponent)
                 {
                     cleanup.UIDocumentComponent.rootVisualElement.Clear();
                     Object.Destroy(cleanup.UIDocumentComponent.gameObject);
                 }
+
                 ecb.RemoveComponent<HealthBarProxyCleanup>(entity);
             }
         }
@@ -129,7 +121,8 @@ namespace Unity.Template.CompetitiveActionMultiplayer.Implementation
                     {
                         var ltwPosition = ltw.ValueRO.Position;
                         var lookAtDirection = ltwPosition - mainCameraPosition;
-                        cleanup.UIDocumentComponent.transform.SetPositionAndRotation(ltwPosition, Quaternion.LookRotation(lookAtDirection));
+                        cleanup.UIDocumentComponent.transform.SetPositionAndRotation(ltwPosition,
+                            Quaternion.LookRotation(lookAtDirection));
                     }
                 }
             }

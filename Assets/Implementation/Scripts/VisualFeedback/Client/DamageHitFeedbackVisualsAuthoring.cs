@@ -6,7 +6,7 @@ namespace MultiplayerAdditions.PredictedFeedback
     public class DamageHitPredictedFeedbackVisualsAuthoring : MonoBehaviour
     {
         public float LifetimeSeconds = 1f;
-        public bool IsNetworked; // You can toggle between Ghost or local use
+        public bool IsNetworked;
         
 
         public class HitFeedbackBaker : Baker<DamageHitPredictedFeedbackVisualsAuthoring>
@@ -21,7 +21,7 @@ namespace MultiplayerAdditions.PredictedFeedback
                 }
                 else
                 {
-                    AddComponent<DamageHitFeedback>(entity); // Lifetime-controlled visual
+                    AddComponent<DamageHitFeedback>(entity);
                     AddComponent(entity, new LifeTime
                     {
                         LifeTimeSeconds = authoring.LifetimeSeconds,
