@@ -21,6 +21,8 @@ This project is based on the official **[Competitive Action Multiplayer template
 
 ## Features Added
 
+Comparison of the template vs my changes **[HERE](https://github.com/RicardCabezas/FPSMultiplayerPlayground/compare/Baseline...SampleShowcase)!**
+
 - **Health Bar**:  
   A simple floating health bar is rendered above each player character.
 
